@@ -83,6 +83,27 @@
     color: var(--cyan);
     margin-bottom: 18px;
   }
+
+  .image-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.image-showcase img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.image-showcase img:hover {
+  transform: scale(1.05);
+}
+
+
+
   h1 {
     font-size: clamp(32px, 5vw, 48px);
     line-height: 1.08;
@@ -257,7 +278,7 @@
   <div class="wrap hero-grid">
     <div>
       <div class="eyebrow">JavaScript &amp; Web Dev · Beginner Reviewer</div>
-      <h1>Walk into your first dev interview <span class="hl">actually ready.</span></h1>
+      <h1>Walk into your first dev interview <span class="hl">actually ready to be a Software Engineer.</span></h1>
       <p class="lede">
         A beginner-friendly reviewer that turns scattered studying into a clear plan —
         built for students, fresh graduates, and career shifters preparing for technical
@@ -281,26 +302,19 @@
     </div>
 
     <!-- Signature: live code-editor mockup -->
-    <div class="editor" aria-hidden="true">
-      <div class="editor-bar">
-        <span class="d r"></span><span class="d y"></span><span class="d g"></span>
-        <span class="file">what-you-will-learn.js</span>
+    <div class="image-showcase">
+      <!-- Row 1 -->
+      <div class="row">
+        <img src="images/pic1.png" alt="Preview 1">
+        <img src="images/pic2.png" alt="Preview 2">
+        <img src="images/pic3.png" alt="Preview 3">
       </div>
-      <div class="editor-body">
-        <div><span class="ln">1</span><span class="cmt">// Everything explained in plain English</span></div>
-        <div><span class="ln">2</span><span class="kw">const</span> <span class="var">youWillLearn</span> = [</div>
-        <div><span class="ln">3</span>&nbsp;&nbsp;<span class="str">"closures, scope &amp; hoisting"</span>,</div>
-        <div><span class="ln">4</span>&nbsp;&nbsp;<span class="str">"async, promises &amp; fetch"</span>,</div>
-        <div><span class="ln">5</span>&nbsp;&nbsp;<span class="str">"DOM, events &amp; arrays"</span>,</div>
-        <div><span class="ln">6</span>&nbsp;&nbsp;<span class="str">"HTML, CSS, Git &amp; REST APIs"</span>,</div>
-        <div><span class="ln">7</span>];</div>
-        <div><span class="ln">8</span></div>
-        <div><span class="ln">9</span><span class="kw">function</span> <span class="fn">getReady</span>() {</div>
-        <div><span class="ln">10</span>&nbsp;&nbsp;<span class="kw">return</span> <span class="var">youWillLearn</span>.<span class="fn">map</span>(<span class="var">topic</span> =&gt;</div>
-        <div><span class="ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">`I can explain ${</span><span class="var">topic</span><span class="str">}`</span></div>
-        <div><span class="ln">12</span>&nbsp;&nbsp;);</div>
-        <div><span class="ln">13</span>}</div>
-        <div><span class="ln">14</span><span class="cmt">// → ready for the interview ✅</span></div>
+
+      <!-- Row 2 -->
+      <div class="row">
+        <img src="images/pic4.png" alt="Preview 4">
+        <img src="images/pic5.png" alt="Preview 5">
+        <img src="images/pic66.png" alt="Preview 6">
       </div>
     </div>
   </div>
@@ -312,7 +326,7 @@
     <div class="section-head">
       <div class="eyebrow">What's inside</div>
       <h2>One file. Everything you need to prepare.</h2>
-      <p>A 34-page PDF you can read on your phone, tablet, or laptop.</p>
+      <p>2 versions of PDF files you can read on your phone, tablet, or laptop.</p>
     </div>
 
     <div class="cards">
