@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JavaScript & Web Development Reviewer</title>
+<meta name="description" content="A beginner-friendly JavaScript and Web Development reviewer to prepare for technical exams and junior developer interviews. 50+ interview questions, 50 MCQs, 30 coding challenges. ₱59." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1b2a;
+    --bg-soft: #14273b;
+    --panel: #16293d;
+    --line: #233a52;
+    --text: #e8edf2;
+    --muted: #9fb2c6;
+    --green: #34d399;
+    --cyan: #56b6c2;
+    --amber: #e5c07b;
+    --pink: #e06c9f;
+    --mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Top bar ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+  }
+  .brand .dot { color: var(--green); }
+  .nav .price-pill {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--green);
+    border: 1px solid var(--green);
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 64px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  h1 .hl { color: var(--green); }
+  .lede {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+  .learn-list {
+    list-style: none;
+    margin: 0 0 32px;
+    display: grid;
+    gap: 10px;
+  }
+  .learn-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px;
+  }
+  .learn-list .tick {
+    color: var(--green);
+    font-family: var(--mono);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .btn-buy {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green);
+    color: #06231a;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 15px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+    box-shadow: 0 8px 30px rgba(52,211,153,0.25);
+  }
+  .btn-buy:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(52,211,153,0.35); }
+  .btn-buy:focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+  .price-tag {
+    font-family: var(--mono);
+  }
+  .price-tag .amt { font-size: 30px; font-weight: 700; color: var(--text); }
+  .price-tag .note { display: block; font-size: 12px; color: var(--muted); }
+
+  /* ---------- Code editor mockup (signature) ---------- */
+  .editor {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    font-family: var(--mono);
+    font-size: 13.5px;
+  }
+  .editor-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 14px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .editor-bar .d { width: 12px; height: 12px; border-radius: 50%; }
+  .d.r { background: #ff5f57; } .d.y { background: #febc2e; } .d.g { background: #28c840; }
+  .editor-bar .file {
+    margin-left: 10px; color: var(--muted); font-size: 12px;
+  }
+  .editor-body { padding: 18px 18px 22px; line-height: 1.8; }
+  .ln { color: #45607d; user-select: none; display: inline-block; width: 22px; }
+  .cmt { color: #6b8299; }
+  .kw  { color: var(--pink); }
+  .fn  { color: var(--cyan); }
+  .str { color: var(--green); }
+  .var { color: var(--amber); }
+
+  /* ---------- Section heading ---------- */
+  section { padding: 72px 0; }
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-head .eyebrow { margin-bottom: 12px; }
+  .section-head h2 {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .section-head p { color: var(--muted); margin-top: 12px; }
+
+  /* ---------- What's inside grid ---------- */
+  .inside { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 24px 22px;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .card:hover { border-color: var(--green); transform: translateY(-3px); }
+  .card .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .card p { font-size: 14px; color: var(--muted); }
+
+  /* ---------- Final CTA ---------- */
+  .final { text-align: center; }
+  .final h2 { font-size: clamp(26px, 4vw, 34px); font-weight: 800; margin-bottom: 14px; }
+  .final p { color: var(--muted); max-width: 540px; margin: 0 auto 30px; }
+  .guarantee {
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+    margin-top: 22px;
+  }
+  .guarantee .g { color: var(--green); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 30px 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer .brand { font-size: 14px; margin-bottom: 8px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .lede { max-width: none; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .editor { order: -1; }
+  }
+  @media (max-width: 560px) {
+    .hero { padding: 48px 0; }
+    .cards { grid-template-columns: 1fr; }
+    .cta-row { gap: 16px; }
+    .nav .brand { font-size: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">sweetbox<span class="dot">.</span>dev</div>
+    <a href="#buy" class="price-pill">Get it — ₱59</a>
+  </div>
+</header>
+
+<!-- ============ SECTION 1: HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">JavaScript &amp; Web Dev · Beginner Reviewer</div>
+      <h1>Walk into your first dev interview <span class="hl">actually ready.</span></h1>
+      <p class="lede">
+        A beginner-friendly reviewer that turns scattered studying into a clear plan —
+        built for students, fresh graduates, and career shifters preparing for technical
+        exams and junior developer interviews.
+      </p>
+
+      <ul class="learn-list">
+        <li><span class="tick">&gt;</span> Master the JavaScript fundamentals interviewers actually ask about</li>
+        <li><span class="tick">&gt;</span> Practice real coding challenges with full solutions and explanations</li>
+        <li><span class="tick">&gt;</span> Answer technical and HR questions with confidence, not memorized scripts</li>
+        <li><span class="tick">&gt;</span> Cover the web basics: HTML, CSS, Git, APIs, and more</li>
+      </ul>
+
+      <div class="cta-row" id="buy">
+        <a href="#" class="btn-buy" id="buyNow">Buy Now &rarr;</a>
+        <div class="price-tag">
+          <span class="amt">&#8369;59</span>
+          <span class="note">one-time &middot; instant lifetime access</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signature: live code-editor mockup -->
+    <div class="editor" aria-hidden="true">
+      <div class="editor-bar">
+        <span class="d r"></span><span class="d y"></span><span class="d g"></span>
+        <span class="file">what-you-will-learn.js</span>
+      </div>
+      <div class="editor-body">
+        <div><span class="ln">1</span><span class="cmt">// Everything explained in plain English</span></div>
+        <div><span class="ln">2</span><span class="kw">const</span> <span class="var">youWillLearn</span> = [</div>
+        <div><span class="ln">3</span>&nbsp;&nbsp;<span class="str">"closures, scope &amp; hoisting"</span>,</div>
+        <div><span class="ln">4</span>&nbsp;&nbsp;<span class="str">"async, promises &amp; fetch"</span>,</div>
+        <div><span class="ln">5</span>&nbsp;&nbsp;<span class="str">"DOM, events &amp; arrays"</span>,</div>
+        <div><span class="ln">6</span>&nbsp;&nbsp;<span class="str">"HTML, CSS, Git &amp; REST APIs"</span>,</div>
+        <div><span class="ln">7</span>];</div>
+        <div><span class="ln">8</span></div>
+        <div><span class="ln">9</span><span class="kw">function</span> <span class="fn">getReady</span>() {</div>
+        <div><span class="ln">10</span>&nbsp;&nbsp;<span class="kw">return</span> <span class="var">youWillLearn</span>.<span class="fn">map</span>(<span class="var">topic</span> =&gt;</div>
+        <div><span class="ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">`I can explain ${</span><span class="var">topic</span><span class="str">}`</span></div>
+        <div><span class="ln">12</span>&nbsp;&nbsp;);</div>
+        <div><span class="ln">13</span>}</div>
+        <div><span class="ln">14</span><span class="cmt">// → ready for the interview ✅</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 2: WHAT'S INSIDE ============ -->
+<section class="inside">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What's inside</div>
+      <h2>One file. Everything you need to prepare.</h2>
+      <p>A 34-page PDF you can read on your phone, tablet, or laptop.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <span class="tag">50+ Questions</span>
+        <h3>Technical Interview Questions</h3>
+        <p>The most-asked JavaScript questions with clear model answers you can actually understand and repeat.</p>
+      </div>
+      <div class="card">
+        <span class="tag">50 Items</span>
+        <h3>Multiple Choice Questions</h3>
+        <p>A full practice exam covering JavaScript, HTML, CSS, the DOM, and APIs — with answer keys and a scoring guide.</p>
+      </div>
+      <div class="card">
+        <span class="tag">30 Problems</span>
+        <h3>Coding Challenges with Answers</h3>
+        <p>Beginner-to-intermediate problems, each solved step by step and explained — no answer left blank.</p>
+      </div>
+      <div class="card">
+        <span class="tag">In Depth</span>
+        <h3>JavaScript Reviewer</h3>
+        <p>Variables, functions, scope, closures, arrays, objects, async/await, and the ES6 features you're expected to know.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Full Stack Basics</span>
+        <h3>Web Development Reviewer</h3>
+        <p>HTML, CSS, Flexbox, Grid, Git &amp; GitHub, HTTP, REST APIs, and web security fundamentals in one place.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Plain English</span>
+        <h3>Beginner-Friendly Explanations</h3>
+        <p>Every topic explains what it is, why it matters, a simple example, and the common mistake to avoid.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Resume Template</span>
+        <h3>Resume Layout</h3>
+        <p>A clean and professional resume format to improve your chances of getting hired.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Quick Reference</span>
+        <h3>Interview Cheat Sheets</h3>
+        <p>Checklists and self-assessment scorecards to know exactly when you're ready to apply.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Bonus</span>
+        <h3>7 &amp; 14-Day Study Plans</h3>
+        <p>Day-by-day plans plus HR answer templates and "what interviewers look for" insights to tie it all together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final">
+  <div class="wrap">
+    <div class="eyebrow">Ready when you are</div>
+    <h2>Start preparing today for ₱59</h2>
+    <p>Stop guessing what to study. Get the complete reviewer and walk into your next exam or interview with a plan.</p>
+    <a href="#" class="btn-buy" id="buyNow2">Buy Now &rarr;</a>
+    <div class="guarantee"><span class="g">✓</span> Instant access after payment confirmation</div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="brand">sweetbox<span class="dot" style="color:var(--green)">.</span>dev</div>
+    <div>JavaScript &amp; Web Development Reviewer</div>
+    <div style="margin-top:6px; font-size:12px;">For educational and personal review use only. © 2026 Sweetbox. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // ====== EDIT THIS: paste your Google Form link between the quotes ======
+  var GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSehdW099TvuXMuXRPbhKxuLjATP1zr0-QAqaEnq3Nz6q3aSQw/viewform?usp=publish-editor";
+  // =======================================================================
+
+  function goToForm(e) {
+    e.preventDefault();
+     if (!GOOGLE_FORM_URL) {
+      alert("Google Form link is missing.");
+      return;
+    }
+    window.open(GOOGLE_FORM_URL, "_blank");
+  }
+
+  document.getElementById("buyNow").addEventListener("click", goToForm);
+  document.getElementById("buyNow2").addEventListener("click", goToForm);
+</script>
+
+</body>
+</html>
